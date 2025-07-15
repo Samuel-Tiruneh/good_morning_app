@@ -40,21 +40,44 @@ class DonatePage extends StatelessWidget {
             const SizedBox(height: 30),
 
             // Donation Options
-            const Text("How You Can Help:", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 10),
-            _buildDonationOption(context, "Sponsor a Toilet Unit", "₹5,000", Icons.wc),
-            _buildDonationOption(context, "Monthly Supporter", "₹500/month", Icons.calendar_today),
-            _buildDonationOption(context, "One-Time Gift", "Any Amount", Icons.currency_rupee),
+            const Text(
+              "How You Can Help:", 
+              style: TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 15),
+            
+            // Equal height donation cards
+            Expanded(
+              child: _buildDonationOption("Sponsor a Toilet Unit", "₹5,000", Icons.wc),
+            ),
+            const SizedBox(height: 15),
+            Expanded(
+              child: _buildDonationOption("Monthly Supporter", "₹500/month", Icons.calendar_today),
+            ),
+            const SizedBox(height: 15),
+            Expanded(
+              child: _buildDonationOption("One-Time Gift", "Any Amount", Icons.currency_rupee),
+            ),
 
-            const Spacer(),
+            const SizedBox(height: 20),
 
             // Secure Donation Button
             ElevatedButton.icon(
-              icon: const Icon(Icons.lock),
-              label: const Text("Donate Securely"),
+              icon: const Icon(Icons.lock, color: Colors.white),
+              label: const Text(
+                "Donate Securely",
+                style: TextStyle(color: Colors.white),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 padding: const EdgeInsets.symmetric(vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
               onPressed: () => launchUrl(
                 Uri.parse("https://TheTannMannGaadi.Org/donate"),
@@ -67,14 +90,52 @@ class DonatePage extends StatelessWidget {
     );
   }
 
-  Widget _buildDonationOption(BuildContext context, String title, String amount, IconData icon) {
+  Widget _buildDonationOption(String title, String amount, IconData icon) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 15),
-      child: ListTile(
-        leading: Icon(icon, color: Colors.orange),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
-        trailing: Chip(label: Text(amount, style: const TextStyle(color: Colors.white))),
-        onTap: () {}, // Could link to specific donation amounts
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        height: 120, // Fixed height for all cards
+        child: Row(
+          children: [
+            Icon(icon, size: 40, color: Colors.orange),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.orange,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      amount,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

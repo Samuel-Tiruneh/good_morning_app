@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    'from Tann Mann Foundation',
+                    'from Tann Mann Gaadi',
                     style: TextStyle(fontStyle: FontStyle.italic),
                     textAlign: TextAlign.center,
                   ),

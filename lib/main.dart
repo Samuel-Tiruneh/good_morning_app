@@ -15,10 +15,10 @@ class TannMannApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-        fontFamily: 'Roboto',
-      ),
+   theme: ThemeData(
+  primarySwatch: Colors.orange,
+  fontFamily: 'Poppins',
+),
       home: const SplashScreen(), // Changed to show splash first
     );
   }
@@ -43,18 +43,29 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Icon(Icons.info_outline), // Changed to info icon
-        backgroundColor: Colors.orange,
-        actions: [
-          Builder(
-            builder: (context) => IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
-          ),
-        ],
+appBar: AppBar(
+  title: Center(
+    child: Text(
+      'The Tann Mann Gaadi',
+      style: TextStyle(
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
       ),
+    ),
+  ),
+  centerTitle: true,
+  backgroundColor: Colors.orange,
+  iconTheme: IconThemeData(color: Colors.white), // This makes all icons white
+  actions: [
+    IconButton(
+      icon: const Icon(Icons.info_outline, color: Colors.white), // Explicit white color
+      onPressed: () {
+        setState(() => _currentIndex = 1);
+      },
+    ),
+  ],
+),
       drawer: _buildDrawer(),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -88,18 +99,19 @@ class _MainScreenState extends State<MainScreen> {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
-            decoration: const BoxDecoration(color: Colors.orange),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/logo.png', height: 80),
-                const SizedBox(height: 10),
-                const Text('Tann Mann Foundation',
-                    style: TextStyle(color: Colors.white, fontSize: 18)),
-              ],
-            ),
-          ),
+       // In _buildDrawer method:
+DrawerHeader(
+  decoration: const BoxDecoration(color: Colors.orange),
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Image.asset('assets/logo.png', height: 80),
+      const SizedBox(height: 10),
+      const Text('The Tann Mann Gaadi',
+          style: TextStyle(color: Colors.white, fontSize: 18)),
+    ],
+  ),
+),
           ExpansionTile(
             leading: const Icon(Icons.info, color: Colors.orange),
             title: const Text('About Us'),
