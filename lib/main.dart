@@ -1,10 +1,9 @@
-// main.dart (updated)
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'about_page.dart';
 import 'donate_page.dart';
 import 'locations_page.dart';
-import 'splash_screen.dart'; // Add this import
+import 'splash_screen.dart';
 
 void main() => runApp(const TannMannApp());
 
@@ -15,11 +14,8 @@ class TannMannApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-   theme: ThemeData(
-  primarySwatch: Colors.orange,
-  fontFamily: 'Poppins',
-),
-      home: const SplashScreen(), // Changed to show splash first
+      theme: ThemeData(primarySwatch: Colors.orange, fontFamily: 'Poppins'),
+      home: const SplashScreen(),
     );
   }
 }
@@ -43,29 +39,34 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-appBar: AppBar(
-  title: Center(
-    child: Text(
-      'The Tann Mann Gaadi',
-      style: TextStyle(
-        fontFamily: 'Poppins',
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'The Tann Mann Gaadi',
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.orange,
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ), 
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.info_outline,
+              color: Colors.white,
+            ), // Explicit white color
+            onPressed: () {
+              setState(() => _currentIndex = 1);
+            },
+          ),
+        ],
       ),
-    ),
-  ),
-  centerTitle: true,
-  backgroundColor: Colors.orange,
-  iconTheme: IconThemeData(color: Colors.white), // This makes all icons white
-  actions: [
-    IconButton(
-      icon: const Icon(Icons.info_outline, color: Colors.white), // Explicit white color
-      onPressed: () {
-        setState(() => _currentIndex = 1);
-      },
-    ),
-  ],
-),
       drawer: _buildDrawer(),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -84,11 +85,17 @@ appBar: AppBar(
             ),
             label: '',
           ),
-          const BottomNavigationBarItem(icon: Icon(Icons.volunteer_activism), label: 'Donate'),
-          const BottomNavigationBarItem(icon: Icon(Icons.location_on), label: 'Locations'),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.volunteer_activism),
+            label: 'Donate',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.location_on),
+            label: 'Locations',
+          ),
         ],
         onTap: (index) {
-          if (index == 2) return; // Skip if logo is clicked
+          if (index == 2) return;
           setState(() => _currentIndex = index > 2 ? index - 1 : index);
         },
       ),
@@ -99,31 +106,27 @@ appBar: AppBar(
     return Drawer(
       child: ListView(
         children: [
-       // In _buildDrawer method:
-DrawerHeader(
-  decoration: const BoxDecoration(color: Colors.orange),
-  child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Image.asset('assets/logo.png', height: 80),
-      const SizedBox(height: 10),
-      const Text('The Tann Mann Gaadi',
-          style: TextStyle(color: Colors.white, fontSize: 18)),
-    ],
-  ),
-),
+          // In _buildDrawer method:
+          DrawerHeader(
+            decoration: const BoxDecoration(color: Colors.orange),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/logo.png', height: 80),
+                const SizedBox(height: 10),
+                const Text(
+                  'The Tann Mann Gaadi',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ],
+            ),
+          ),
           ExpansionTile(
             leading: const Icon(Icons.info, color: Colors.orange),
             title: const Text('About Us'),
             children: [
-              ListTile(
-                title: const Text('Our Mission'),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text('Our Team'),
-                onTap: () {},
-              ),
+              ListTile(title: const Text('Our Mission'), onTap: () {}),
+              ListTile(title: const Text('Our Team'), onTap: () {}),
             ],
           ),
           ListTile(
@@ -140,14 +143,8 @@ DrawerHeader(
             leading: const Icon(Icons.help, color: Colors.orange),
             title: const Text('FAQ'),
             children: [
-              ListTile(
-                title: const Text('How to Donate?'),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text('Where we work?'),
-                onTap: () {},
-              ),
+              ListTile(title: const Text('How to Donate?'), onTap: () {}),
+              ListTile(title: const Text('Where we work?'), onTap: () {}),
             ],
           ),
           const Divider(),
@@ -155,8 +152,10 @@ DrawerHeader(
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                const Text('Connect With Us',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                const Text(
+                  'Connect With Us',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -170,7 +169,10 @@ DrawerHeader(
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: const Icon(Icons.youtube_searched_for, color: Colors.red),
+                      icon: const Icon(
+                        Icons.youtube_searched_for,
+                        color: Colors.red,
+                      ),
                       onPressed: () {},
                     ),
                     IconButton(
